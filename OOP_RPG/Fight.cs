@@ -18,14 +18,8 @@ namespace OOP_RPG
 
         private void AddMonster(string name, int strength, int defense, int hp)
         {
-            var monster = new Monster();
-
-            monster.Name = name;
-            monster.Strength = strength;
-            monster.Defense = defense;
-            monster.OriginalHP = hp;
-            monster.CurrentHP = hp;
-
+            //Requirement 1: make it required that Name, Strength, Defense, OriginalHP, and CurrentHP parameters are provided when creating monsters across our code base.
+            var monster = new Monster(name, strength, defense, hp, hp);
             Monsters.Add(monster);
         }
 

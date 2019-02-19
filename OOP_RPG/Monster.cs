@@ -10,6 +10,7 @@ namespace OOP_RPG
         public int OriginalHP { get; set; }
         public int CurrentHP { get; set; }
 <<<<<<< HEAD
+<<<<<<< HEAD
         public string Difficulty { get; }
        
         public Monster(string name, string difficulty)
@@ -36,6 +37,8 @@ namespace OOP_RPG
             Name = name;
             CurrentHP = OriginalHP;
 =======
+=======
+>>>>>>> cd75714f82f2ee9368f67590b3f64caa05b2e6fe
 
         //Requirement 1: make it required that Name, Strength, Defense, OriginalHP, and CurrentHP parameters are provided when creating monsters across our code base.
         public Monster(string name, int strength, int defense, int originalHP, int currentHP)
@@ -45,6 +48,9 @@ namespace OOP_RPG
             Defense = defense;
             OriginalHP = originalHP;
             CurrentHP = currentHP;
+<<<<<<< HEAD
+>>>>>>> cd75714f82f2ee9368f67590b3f64caa05b2e6fe
+=======
 >>>>>>> cd75714f82f2ee9368f67590b3f64caa05b2e6fe
         }
     }

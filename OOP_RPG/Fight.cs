@@ -46,6 +46,9 @@ namespace OOP_RPG
         {
             //Requirement 1: make it required that Name, Strength, Defense, OriginalHP, and CurrentHP parameters are provided when creating monsters across our code base.
             var monster = new Monster(name, strength, defense, hp, hp);
+<<<<<<< HEAD
+>>>>>>> cd75714f82f2ee9368f67590b3f64caa05b2e6fe
+=======
 >>>>>>> cd75714f82f2ee9368f67590b3f64caa05b2e6fe
             Monsters.Add(monster);
         }

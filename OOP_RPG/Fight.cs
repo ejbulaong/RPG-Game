@@ -21,13 +21,13 @@ namespace OOP_RPG
             var monstersGroup5 = new List<string> { "Gyū-Maō", "Lunch", "Chaozu", "Dr. Briefs", "Cell" };
             var monstersGroup6 = new List<string> { "Karin", "Yajirobe", "Mr. Popo", "Kami", "Freeza" };
             var monstersGroup7 = new List<string> { "Dende", "Android 17", "Mr. Satan", "Videl", "Piccolo" };
+            var monstersGroups = new List<List<string>> { monstersGroup1, monstersGroup2, monstersGroup3, monstersGroup4, monstersGroup5, monstersGroup6, monstersGroup7 };
 
             var daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-            var monstersGroups = new List<List<string>> { monstersGroup1, monstersGroup2, monstersGroup3, monstersGroup4, monstersGroup5, monstersGroup6, monstersGroup7 };
             var difficulty = new List<string> { "Easy", "Easy", "Medium", "Medium", "Hard" };
 
             for (var x = 0; x <= 6; x++)
-            {//loop to the daysOfWeek and compare the day today to the on the list
+            {//loop to the daysOfWeek and compare the day today to the days on the list
                 if (DateTime.Today.DayOfWeek.ToString() == daysOfWeek[x])
                 {//using the index of the day in daysOfWeek, select the group of monsters in the monstersGroup
                     foreach (var name in monstersGroups[x])

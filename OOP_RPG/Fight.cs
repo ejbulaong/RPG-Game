@@ -21,7 +21,7 @@ namespace OOP_RPG
             var monstersGroup6 = new List<string> { "Karin", "Yajirobe", "Mr. Popo", "Kami", "Freeza" };
             var monstersGroup7 = new List<string> { "Dende", "Android 17", "Mr. Satan", "Videl", "Piccolo" };
 
-<<<<<<< HEAD
+
             var daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
             var monstersGroups = new List<List<string>> { monstersGroup1, monstersGroup2, monstersGroup3, monstersGroup4, monstersGroup5, monstersGroup6, monstersGroup7 };
             var difficulty = new List<string> { "Easy", "Easy", "Medium", "Medium", "Hard" };
@@ -41,15 +41,7 @@ namespace OOP_RPG
         private void AddMonster(string name, string difficulty)
         {
             var monster = new Monster(name, difficulty);
-=======
-        private void AddMonster(string name, int strength, int defense, int hp)
-        {
-            //Requirement 1: make it required that Name, Strength, Defense, OriginalHP, and CurrentHP parameters are provided when creating monsters across our code base.
-            var monster = new Monster(name, strength, defense, hp, hp);
-<<<<<<< HEAD
->>>>>>> cd75714f82f2ee9368f67590b3f64caa05b2e6fe
-=======
->>>>>>> cd75714f82f2ee9368f67590b3f64caa05b2e6fe
+
             Monsters.Add(monster);
         }
 

@@ -12,6 +12,7 @@ namespace OOP_RPG
         public int Defense { get; }
         public int OriginalHP { get; set; }
         public int CurrentHP { get; set; }
+        public int Golds { get; set; }
         public Weapon EquippedWeapon { get; private set; }
         public Armor EquippedArmor { get; private set; }
         public List<Armor> ArmorsBag { get; set; }
@@ -32,6 +33,7 @@ namespace OOP_RPG
             Defense = 10;
             OriginalHP = 30;
             CurrentHP = 30;
+            Golds = 0;
         }
 
         //These are the Methods of our Class.
@@ -59,6 +61,7 @@ namespace OOP_RPG
             {
                 Console.WriteLine(armor.Name + " of " + armor.Defense + " Defense");
             }
+            Console.WriteLine("Golds: " + Golds);
         }
 
         public void EquipWeapon()

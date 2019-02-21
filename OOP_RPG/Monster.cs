@@ -10,6 +10,7 @@ namespace OOP_RPG
         public int Defense { get; set; }
         public int OriginalHP { get; set; }
         public int CurrentHP { get; set; }
+        public int GoldsDrop { get; set; }
 
         public Monster(string name, string difficulty)
         {
@@ -20,18 +21,21 @@ namespace OOP_RPG
                 Strength = rnd.Next(16, 19);
                 Defense = rnd.Next(7, 10);
                 OriginalHP = rnd.Next(21, 25);
+                GoldsDrop = rnd.Next(21, 31);
             }
             else if (difficulty == "Medium")
             {
                 Strength = rnd.Next(13, 16);
                 Defense = rnd.Next(5, 7);
                 OriginalHP = rnd.Next(18, 21);
+                GoldsDrop = rnd.Next(11, 21);
             }
             else if (difficulty == "Easy")
             {
                 Strength = rnd.Next(10, 13);
                 Defense = rnd.Next(3, 5);
                 OriginalHP = rnd.Next(15, 18);
+                GoldsDrop = rnd.Next(1, 11);
             }
 
             Name = name;

@@ -120,7 +120,8 @@ namespace OOP_RPG
 
         private void Win()
         {
-            Console.WriteLine(Enemy.Name + " has been defeated! You win the battle!");
+            Hero.Golds += Enemy.GoldsDrop;
+            Console.WriteLine($"{Enemy.Name} has been defeated! You win the battle! {Enemy.GoldsDrop} Golds received");
         }
 
         private void Lose()

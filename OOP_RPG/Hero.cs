@@ -79,5 +79,40 @@ namespace OOP_RPG
                 this.EquippedArmor = this.ArmorsBag[0];
             }
         }
+
+        public void purchaseWeapon(Weapon weapon)
+        {
+            if (weapon == null)
+            {
+                Console.WriteLine($"Sorry. weapon not found!!!");
+            }
+            else if (this.Golds < weapon.Price)
+            {
+                Console.WriteLine($"Sorry. Not enough Golds!!!");
+            }
+            else
+            {
+                Console.WriteLine($"{weapon.Name} successfully purchased!!!");
+                WeaponsBag.Add(weapon);
+            }
+
+        }
+
+        public void purchaseArmor(Armor armor)
+        {
+            if (armor == null) 
+            {
+                Console.WriteLine($"Sorry. armor not found!!!");
+            }
+            else if (this.Golds < armor.Price)
+            {
+                Console.WriteLine($"Sorry. Not enough Golds!!!");
+            }
+            else
+            {
+                Console.WriteLine($"{armor.Name} successfully purchased!!!");
+                ArmorsBag.Add(armor);
+            }
+        }
     }
 }

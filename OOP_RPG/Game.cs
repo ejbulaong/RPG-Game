@@ -74,8 +74,23 @@ namespace OOP_RPG
         {
             Hero.ShowInventory();
 
-            Console.WriteLine("Press any key to return to main menu.");
-            Console.ReadKey();
+            var userInput = "";
+            Console.WriteLine("Please choose an option:");
+            Console.WriteLine("1 - Equip Weapon");
+            Console.WriteLine("2 - Equip Armor");
+            Console.WriteLine("Any other key - Main Menu");
+
+            userInput = Console.ReadLine();
+
+            if (userInput == "1")
+            {
+                Hero.EquipWeapon();
+            }
+            else if (userInput == "2")
+            {
+                Hero.EquipArmor();
+            }
+
         }
 
         private void Fight()
@@ -125,7 +140,7 @@ namespace OOP_RPG
                         }
                     }
 
-                    Hero.purchaseWeapon(weaponToPurchase);
+                    Hero.PurchaseWeapon(weaponToPurchase);
                 }
                 else if (userInput == "2")
                 {
@@ -149,7 +164,7 @@ namespace OOP_RPG
                         }
                     }
 
-                    Hero.purchaseArmor(armorToPurchase);
+                    Hero.PurchaseArmor(armorToPurchase);
                 }
 
             }

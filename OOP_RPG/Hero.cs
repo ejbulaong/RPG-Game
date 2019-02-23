@@ -8,8 +8,8 @@ namespace OOP_RPG
     {
         // These are the Properties of our Class.
         public string Name { get; set; }
-        public int Strength { get; }
-        public int Defense { get; }
+        public int Strength { get; private set; }
+        public int Defense { get; private set; }
         public int OriginalHP { get; set; }
         public int CurrentHP { get; set; }
         public int Golds { get; set; }
@@ -33,15 +33,35 @@ namespace OOP_RPG
             Defense = 10;
             OriginalHP = 30;
             CurrentHP = 30;
-            Golds = 0;
+            Golds = 20;
         }
 
         //These are the Methods of our Class.
         public void ShowStats()
         {
             Console.WriteLine("*****" + this.Name + "*****");
-            Console.WriteLine("Strength: " + this.Strength);
-            Console.WriteLine("Defense: " + this.Defense);
+
+            if (this.EquippedWeapon != null)
+            {
+                Console.WriteLine("Strength: " + this.Strength + "(+" + this.EquippedWeapon.Strength + ")");
+                this.Strength += this.EquippedWeapon.Strength;
+            } else
+            {
+                Console.WriteLine("Strength: " + this.Strength);
+            }
+
+            if (this.EquippedArmor != null)
+            {
+
+                Console.WriteLine("Defense: " + this.Defense + "(+" + this.EquippedArmor.Defense + ")");
+                this.Defense += this.EquippedArmor.Defense;
+            }
+            else
+            {
+                Console.WriteLine("Defense: " + this.Defense);
+            }
+
+
             Console.WriteLine("Hitpoints: " + this.CurrentHP + "/" + this.OriginalHP);
         }
 
@@ -69,6 +89,11 @@ namespace OOP_RPG
             if (WeaponsBag.Any())
             {
                 this.EquippedWeapon = this.WeaponsBag[0];
+                Console.WriteLine("Successfully equipped weapon!!!");
+            }
+            else
+            {
+                Console.WriteLine("Sorry no weapon to equip!!!");
             }
         }
 
@@ -77,10 +102,15 @@ namespace OOP_RPG
             if (ArmorsBag.Any())
             {
                 this.EquippedArmor = this.ArmorsBag[0];
+                Console.WriteLine("Successfully equipped armor!!!");
+            }
+            else
+            {
+                Console.WriteLine("Sorry no armor to equip!!!");
             }
         }
 
-        public void purchaseWeapon(Weapon weapon)
+        public void PurchaseWeapon(Weapon weapon)
         {
             if (weapon == null)
             {
@@ -92,13 +122,14 @@ namespace OOP_RPG
             }
             else
             {
+                this.Golds -= weapon.Price;
                 Console.WriteLine($"{weapon.Name} successfully purchased!!!");
                 WeaponsBag.Add(weapon);
             }
 
         }
 
-        public void purchaseArmor(Armor armor)
+        public void PurchaseArmor(Armor armor)
         {
             if (armor == null) 
             {
@@ -110,6 +141,7 @@ namespace OOP_RPG
             }
             else
             {
+                this.Golds -= armor.Price;
                 Console.WriteLine($"{armor.Name} successfully purchased!!!");
                 ArmorsBag.Add(armor);
             }

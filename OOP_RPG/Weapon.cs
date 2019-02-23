@@ -6,6 +6,7 @@ namespace OOP_RPG
         public string Name { get; }
         public int Strength { get; }
         public int Price { get; }
+        public bool Equipped { get; set; }
 
         public Weapon(string id, string name, int strength, int price)
         {
@@ -13,6 +14,7 @@ namespace OOP_RPG
             Name = name;
             Strength = strength;
             Price = price;
+            Equipped = false;
         }
     }
 }

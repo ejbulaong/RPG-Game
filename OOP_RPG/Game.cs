@@ -75,22 +75,47 @@ namespace OOP_RPG
             Hero.ShowInventory();
 
             var userInput = "";
-            Console.WriteLine("Please choose an option:");
-            Console.WriteLine("1 - Equip Weapon");
-            Console.WriteLine("2 - Equip Armor");
-            Console.WriteLine("Any other key - Main Menu");
 
-            userInput = Console.ReadLine();
-
-            if (userInput == "1")
+            while (userInput != "0")
             {
-                Hero.EquipWeapon();
-            }
-            else if (userInput == "2")
-            {
-                Hero.EquipArmor();
-            }
+                Console.WriteLine("Please choose an option:");
+                Console.WriteLine("1 - Equip Weapon");
+                Console.WriteLine("2 - Equip Armor");
+                Console.WriteLine("3 - Unequip Weapon");
+                Console.WriteLine("4 - Unequip Armor");
+                Console.WriteLine("0 - Main Menu");
 
+                userInput = Console.ReadLine();
+
+                if (userInput == "1")
+                {
+                    Console.WriteLine("Choose a weapon to equip:");
+                    foreach (var weapon in Hero.WeaponsBag)
+                    {
+                        Console.WriteLine($"ID: {weapon.ID} Weapon: {weapon.Name} Strength: {weapon.Strength}");
+                    }
+
+                    Hero.EquipWeapon();
+                }
+                else if (userInput == "2")
+                {
+                    Console.WriteLine("Choose an armor to equip:");
+                    foreach (var armor in Hero.ArmorsBag)
+                    {
+                        Console.WriteLine($"ID: {armor.ID} Weapon: {armor.Name} Defense: {armor.Defense}");
+                    }
+
+                    Hero.EquipArmor();
+                }
+                else if (userInput == "3")
+                {
+                    Hero.UnequipWeapon();
+                }
+                else if (userInput == "4")
+                {
+                    Hero.UnequipArmor();
+                }
+            }
         }
 
         private void Fight()
@@ -166,7 +191,6 @@ namespace OOP_RPG
 
                     Hero.PurchaseArmor(armorToPurchase);
                 }
-
             }
         }
     }

@@ -68,9 +68,18 @@ namespace OOP_RPG
 
         private void HeroTurn()
         {
-            var baseDamage = Hero.Strength - Enemy.Defense;
             Random rnd = new Random();
             int finalDamage;
+            int baseDamage;
+
+            if (Hero.EquippedWeapon == null)
+            {
+                baseDamage = Hero.Strength - Enemy.Defense;
+            }
+            else
+            {
+                baseDamage = Hero.Strength + Hero.EquippedWeapon.Strength - Enemy.Defense;
+            }
 
             if (baseDamage <= 0)
             {
@@ -97,9 +106,18 @@ namespace OOP_RPG
 
         private void MonsterTurn()
         {
-            var baseDamage = Enemy.Strength - Hero.Defense;
             Random rnd = new Random();
             int finalDamage;
+            int baseDamage;
+
+            if (Hero.EquippedArmor == null)
+            {
+                baseDamage = Enemy.Strength - Hero.Defense;
+            }
+            else
+            {
+                baseDamage = Enemy.Strength - (Hero.Defense + Hero.EquippedArmor.Defense);
+            }
 
             if (baseDamage <= 0)
             {

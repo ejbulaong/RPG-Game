@@ -44,8 +44,8 @@ namespace OOP_RPG
             if (this.EquippedWeapon != null)
             {
                 Console.WriteLine("Strength: " + this.Strength + "(+" + this.EquippedWeapon.Strength + ")");
-                this.Strength += this.EquippedWeapon.Strength;
-            } else
+            }
+            else
             {
                 Console.WriteLine("Strength: " + this.Strength);
             }
@@ -54,7 +54,6 @@ namespace OOP_RPG
             {
 
                 Console.WriteLine("Defense: " + this.Defense + "(+" + this.EquippedArmor.Defense + ")");
-                this.Defense += this.EquippedArmor.Defense;
             }
             else
             {
@@ -86,27 +85,91 @@ namespace OOP_RPG
 
         public void EquipWeapon()
         {
-            if (WeaponsBag.Any())
+            if (!WeaponsBag.Any())
             {
-                this.EquippedWeapon = this.WeaponsBag[0];
-                Console.WriteLine("Successfully equipped weapon!!!");
+                Console.WriteLine("Sorry. No weapon to equip!!!");
             }
             else
             {
-                Console.WriteLine("Sorry no weapon to equip!!!");
+                var weaponsID = "";
+                Console.Write("Please type weapon's ID: ");
+                weaponsID = Console.ReadLine();
+
+                foreach (var weapon in this.WeaponsBag)
+                {
+                    if (weapon.ID.ToLower() == weaponsID.ToLower() && weapon.Equipped == true)
+                    {
+                        Console.WriteLine("Weapon already equipped!!!");
+                    }
+                    else if (weapon.ID.ToLower() == weaponsID.ToLower() && weapon.Equipped == false)
+                    {
+                        this.EquippedWeapon = weapon;
+                        weapon.Equipped = true;
+                        Console.WriteLine("Successfully equipped weapon!!!");
+                    }
+                }
             }
         }
 
         public void EquipArmor()
         {
-            if (ArmorsBag.Any())
+            if (!ArmorsBag.Any())
             {
-                this.EquippedArmor = this.ArmorsBag[0];
-                Console.WriteLine("Successfully equipped armor!!!");
+                Console.WriteLine("Sorry. No armor to equip!!!");
             }
             else
             {
-                Console.WriteLine("Sorry no armor to equip!!!");
+                var armorsID = "";
+                Console.Write("Please type armor's ID: ");
+                armorsID = Console.ReadLine();
+
+                foreach (var armor in this.ArmorsBag)
+                {
+                    if (armor.ID.ToLower() == armorsID.ToLower() && armor.Equipped == true)
+                    {
+                        Console.WriteLine("Armor already equipped!!!");
+                    }
+                    else if (armor.ID.ToLower() == armorsID.ToLower() && armor.Equipped == false)
+                    {
+                        this.EquippedArmor = armor;
+                        armor.Equipped = true;
+                        Console.WriteLine("Successfully equipped armor!!!");
+                    }
+                }
+            }
+        }
+
+        public void UnequipWeapon()
+        {
+            if (this.EquippedWeapon == null)
+            {
+                Console.WriteLine("Sorry you are not equipped with any weapon!!!");
+            }
+            else
+            {
+                this.EquippedWeapon = null;
+                foreach (var weapon in this.WeaponsBag)
+                {
+                    weapon.Equipped = false;
+                }
+                Console.WriteLine("Weapon successfully unequiped!!!");
+            }
+        }
+
+        public void UnequipArmor()
+        {
+            if (this.EquippedArmor == null)
+            {
+                Console.WriteLine("Sorry you are not equipped with any armor!!!");
+            }
+            else
+            {
+                this.EquippedArmor = null;
+                foreach (var armor in this.ArmorsBag)
+                {
+                    armor.Equipped = false;
+                }
+                Console.WriteLine("Armor successfully unequiped!!!");
             }
         }
 
@@ -131,7 +194,7 @@ namespace OOP_RPG
 
         public void PurchaseArmor(Armor armor)
         {
-            if (armor == null) 
+            if (armor == null)
             {
                 Console.WriteLine($"Sorry. armor not found!!!");
             }

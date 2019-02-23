@@ -68,21 +68,22 @@ namespace OOP_RPG
 
         private void HeroTurn()
         {
-            var compare = Hero.Strength - Enemy.Defense;
-            int damage;
+            var baseDamage = Hero.Strength - Enemy.Defense;
+            Random rnd = new Random();
+            int finalDamage;
 
-            if (compare <= 0)
+            if (baseDamage <= 0)
             {
-                damage = 1;
-                Enemy.CurrentHP -= damage;
+                finalDamage = 1;
+                Enemy.CurrentHP -= finalDamage;
             }
             else
             {
-                damage = compare;
-                Enemy.CurrentHP -= damage;
+                finalDamage = rnd.Next(baseDamage - (baseDamage / 2), (baseDamage + (baseDamage / 2) + 1));
+                Enemy.CurrentHP -= finalDamage;
             }
 
-            Console.WriteLine("You did " + damage + " damage!");
+            Console.WriteLine("You did " + finalDamage + " damage!");
 
             if (Enemy.CurrentHP <= 0)
             {
@@ -96,21 +97,22 @@ namespace OOP_RPG
 
         private void MonsterTurn()
         {
-            int damage;
-            var compare = Enemy.Strength - Hero.Defense;
+            var baseDamage = Enemy.Strength - Hero.Defense;
+            Random rnd = new Random();
+            int finalDamage;
 
-            if (compare <= 0)
+            if (baseDamage <= 0)
             {
-                damage = 1;
-                Hero.CurrentHP -= damage;
+                finalDamage = 1;
+                Hero.CurrentHP -= finalDamage;
             }
             else
             {
-                damage = compare;
-                Hero.CurrentHP -= damage;
+                finalDamage = rnd.Next(baseDamage - (baseDamage / 2), (baseDamage + (baseDamage / 2) + 1));
+                Hero.CurrentHP -= finalDamage;
             }
 
-            Console.WriteLine(Enemy.Name + " does " + damage + " damage!");
+            Console.WriteLine(Enemy.Name + " does " + finalDamage + " damage!");
 
             if (Hero.CurrentHP <= 0)
             {

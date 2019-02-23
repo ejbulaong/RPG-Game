@@ -33,7 +33,7 @@ namespace OOP_RPG
             Defense = 10;
             OriginalHP = 30;
             CurrentHP = 30;
-            Golds = 20;
+            Golds = 20;//initial golds provided for testing the shop functionality
         }
 
         //These are the Methods of our Class.

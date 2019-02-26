@@ -31,7 +31,7 @@ namespace OOP_RPG
             PotionsBag = new List<Potion>();
             Achievements = new List<Achievements>();
             KilledMonsters = new List<Monster>();
-            Strength = 100;
+            Strength = 10;
             Defense = 10;
             OriginalHP = 30;
             CurrentHP = 30;

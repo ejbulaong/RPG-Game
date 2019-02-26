@@ -10,10 +10,12 @@ namespace OOP_RPG
         private Hero Hero { get; }
         private Monster Enemy { get; }
         private Random Random { get; set; }
+        private bool RunningAway { get; set; }
         public Fight(Hero game)
         {
             Hero = game;
             Monsters = new List<Monster>();
+            RunningAway = false;
             Random = new Random();
             var monstersGroup1 = new List<string> { "Trunks", "Tenshinhan", "Kuririn", "Yamcha", "Son Goku" };
             var monstersGroup2 = new List<string> { "Android 18", "Android 18", "Android 18", "Beerus", "Beerus" };
@@ -51,7 +53,7 @@ namespace OOP_RPG
 
         public void Start()
         {
-            while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0)
+            while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0 && RunningAway == false)
             {
                 Console.WriteLine("You've encountered " + Enemy.Name + "! " + Enemy.Strength + " Strength/" + Enemy.Defense + " Defense/" +
                 Enemy.CurrentHP + " HP/" + Enemy.Difficulty + " Level. What will you do?");
@@ -189,6 +191,7 @@ namespace OOP_RPG
 
         private void Run()
         {
+            RunningAway = true;
             Console.WriteLine("Hero successfully runs away from the monster!!!");
         }
     }

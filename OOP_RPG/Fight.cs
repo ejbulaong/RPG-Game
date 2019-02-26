@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OOP_RPG
 {
@@ -8,12 +9,12 @@ namespace OOP_RPG
         private List<Monster> Monsters { get; }
         private Hero Hero { get; }
         private Monster Enemy { get; }
-
+        private Random Random { get; set; }
         public Fight(Hero game)
         {
             Hero = game;
             Monsters = new List<Monster>();
-
+            Random = new Random();
             var monstersGroup1 = new List<string> { "Trunks", "Tenshinhan", "Kuririn", "Yamcha", "Son Goku" };
             var monstersGroup2 = new List<string> { "Android 18", "Son Goten", "Beerus", "Whis", "Son Gohan" };
             var monstersGroup3 = new List<string> { "Taopaipai", "Broly", "Bobbidi", "Dabra", "Vegeta" };
@@ -37,8 +38,7 @@ namespace OOP_RPG
                 }
             }
             //choose random enemy from the Monsters list
-            Random rnd = new Random();
-            Enemy = Monsters[rnd.Next(0, 5)];
+            Enemy = Monsters[Random.Next(0, 5)];
         }
 
         private void AddMonster(string name, string difficulty)
@@ -56,6 +56,7 @@ namespace OOP_RPG
                 Enemy.CurrentHP + " HP/" + Enemy.Difficulty + " Level. What will you do?");
 
                 Console.WriteLine("1. Fight");
+                Console.WriteLine("2. Heal");
 
                 var input = Console.ReadLine();
 
@@ -63,12 +64,17 @@ namespace OOP_RPG
                 {
                     HeroTurn();
                 }
+                else if (input == "2")
+                {
+                    Hero.UsePotion();
+                }
             }
         }
 
+       
+
         private void HeroTurn()
         {
-            Random rnd = new Random();
             int finalDamage;
             int baseDamage;
 
@@ -88,7 +94,7 @@ namespace OOP_RPG
             }
             else
             {
-                finalDamage = rnd.Next(baseDamage - (baseDamage / 2), (baseDamage + (baseDamage / 2) + 1));
+                finalDamage = Random.Next(baseDamage - (baseDamage / 2), (baseDamage + (baseDamage / 2) + 1));
                 Enemy.CurrentHP -= finalDamage;
             }
 
@@ -106,7 +112,6 @@ namespace OOP_RPG
 
         private void MonsterTurn()
         {
-            Random rnd = new Random();
             int finalDamage;
             int baseDamage;
 
@@ -134,7 +139,7 @@ namespace OOP_RPG
             }
             else
             {
-                finalDamage = rnd.Next(baseDamage - (baseDamage / 2), (baseDamage + (baseDamage / 2) + 1));
+                finalDamage = Random.Next(baseDamage - (baseDamage / 2), (baseDamage + (baseDamage / 2) + 1));
                 Hero.CurrentHP -= finalDamage;
             }
 

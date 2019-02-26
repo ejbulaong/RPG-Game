@@ -53,7 +53,7 @@ namespace OOP_RPG
 
                 Console.WriteLine("Defense: " + this.Defense + "(+" + (this.EquippedArmor.Defense + this.EquippedShield.Defense) + ")");
             }
-            else if(this.EquippedArmor != null && this.EquippedShield == null)
+            else if (this.EquippedArmor != null && this.EquippedShield == null)
             {
                 Console.WriteLine("Defense: " + this.Defense + "(+" + this.EquippedArmor.Defense + ")");
             }
@@ -314,15 +314,59 @@ namespace OOP_RPG
 
         public void Heal(Potion potion)
         {
-            var maxHP = this.OriginalHP;
-
-            if(this.CurrentHP + potion.HealthRestored > maxHP)
+            if (potion == null)
             {
-                this.CurrentHP = maxHP;
+                Console.WriteLine("Sorry. Potion not found!!!");
             }
             else
             {
-                this.CurrentHP += potion.HealthRestored;
+                if (potion.HealthRestored + this.CurrentHP > this.OriginalHP)
+                {
+                    this.CurrentHP = this.OriginalHP;
+                }
+                else
+                {
+                    this.CurrentHP += potion.HealthRestored;
+                }
+                this.PotionsBag.Remove(potion);
+                Console.WriteLine("Health potion successfully used!!!");
+            }
+        }
+
+        public void UsePotion()
+        {
+            var maxHP = this.OriginalHP;
+
+            if (this.CurrentHP == maxHP)
+            {
+                Console.WriteLine("No need to heal. HP is full");
+            }
+            else if (!this.PotionsBag.Any())
+            {
+                Console.WriteLine("Sorry. You don't have any healing potion!");
+            }
+            else
+            {
+                Console.WriteLine("Choose a potion to use:");
+
+                foreach (var potion in this.PotionsBag)
+                {
+                    Console.WriteLine(potion.DisplayInfo());
+                }
+
+                Console.Write("Please type the potion id to use: ");
+
+                var potionInput = Console.ReadLine();
+                Potion potionToUse = null;
+
+                foreach (var potion in this.PotionsBag.ToList())
+                {
+                    if (potion.ID.ToLower() == potionInput)
+                    {
+                        potionToUse = potion;
+                    }
+                }
+                this.Heal(potionToUse);
             }
         }
     }

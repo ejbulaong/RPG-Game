@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace OOP_RPG
 {
@@ -85,6 +86,7 @@ namespace OOP_RPG
                 Console.WriteLine("4 - Unequip Weapon");
                 Console.WriteLine("5 - Unequip Armor");
                 Console.WriteLine("6 - Unequip Shield");
+                Console.WriteLine("7 - Heal");
                 Console.WriteLine("0 - Main Menu");
 
                 userInput = Console.ReadLine();
@@ -116,7 +118,6 @@ namespace OOP_RPG
                     {
                         Console.WriteLine(shield.DisplayInfo());
                     }
-
                     Hero.EquipShield();
                 }
                 else if (userInput == "4")
@@ -131,8 +132,12 @@ namespace OOP_RPG
                 {
                     Hero.UnequipShield();
                 }
+                else if (userInput == "7")
+                {
+                    Hero.UsePotion();
+                }
             }
-        }
+        }         
 
         private void Fight()
         {

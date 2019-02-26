@@ -24,7 +24,7 @@ namespace OOP_RPG
             Main();
         }
 
-        private void Main()
+        public void Main()
         {
             var input = "";
 

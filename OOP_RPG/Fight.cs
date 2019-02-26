@@ -56,7 +56,8 @@ namespace OOP_RPG
                 Enemy.CurrentHP + " HP/" + Enemy.Difficulty + " Level. What will you do?");
 
                 Console.WriteLine("1. Fight");
-                Console.WriteLine("2. Heal");
+                Console.WriteLine("2. Run");
+                Console.WriteLine("3. Heal");
 
                 var input = Console.ReadLine();
 
@@ -66,12 +67,14 @@ namespace OOP_RPG
                 }
                 else if (input == "2")
                 {
+                    HeroRun();
+                }
+                else if (input == "3")
+                {
                     Hero.UsePotion();
                 }
             }
         }
-
-       
 
         private void HeroTurn()
         {
@@ -106,6 +109,23 @@ namespace OOP_RPG
             }
             else
             {
+                MonsterTurn();
+            }
+        }
+
+        private void HeroRun()
+        {
+            var randomNumber = Random.Next(1, 101);
+
+            if ((Enemy.Difficulty == "Easy" && randomNumber > 50) ||
+                (Enemy.Difficulty == "Medium" && randomNumber > 75) ||
+                (Enemy.Difficulty == "Hard" && randomNumber > 95))
+            {
+                Run();
+            }
+            else
+            {
+                Console.WriteLine("Running Failed!!!");
                 MonsterTurn();
             }
         }
@@ -162,6 +182,11 @@ namespace OOP_RPG
             Console.WriteLine("You've been defeated! :( GAME OVER.");
             Console.WriteLine("Press any key to exit the game");
             Console.ReadKey();
+        }
+
+        private void Run()
+        {
+            Console.WriteLine("Hero successfully runs away from the monster!!!");
         }
     }
 }

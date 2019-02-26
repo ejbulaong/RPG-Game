@@ -33,8 +33,9 @@ namespace OOP_RPG
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");
                 Console.WriteLine("2. View Inventory");
-                Console.WriteLine("3. Fight Monster");
-                Console.WriteLine("4. Shop");
+                Console.WriteLine("3. View Achievements");
+                Console.WriteLine("4. Fight Monster");
+                Console.WriteLine("5. Shop");
                 Console.WriteLine("0. Exit");
 
                 input = Console.ReadLine();
@@ -49,9 +50,13 @@ namespace OOP_RPG
                 }
                 else if (input == "3")
                 {
-                    this.Fight();
+                    this.Achievement();
                 }
                 else if (input == "4")
+                {
+                    this.Fight();
+                }
+                else if (input == "5")
                 {
                     this.Shop();
                 }
@@ -137,7 +142,12 @@ namespace OOP_RPG
                     Hero.UsePotion();
                 }
             }
-        }         
+        } 
+        
+        private void Achievement()
+        {
+            Hero.ShowAchievements();
+        }
 
         private void Fight()
         {

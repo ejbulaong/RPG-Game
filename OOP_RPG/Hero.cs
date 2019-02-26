@@ -20,6 +20,8 @@ namespace OOP_RPG
         public List<Armor> ArmorsBag { get; set; }
         public List<Shield> ShieldsBag { get; set; }
         public List<Potion> PotionsBag { get; set; }
+        public List<Achievements> Achievements { get; set; }
+        public List<Monster> KilledMonsters { get; set; }
 
         public Hero()
         {
@@ -27,11 +29,18 @@ namespace OOP_RPG
             WeaponsBag = new List<Weapon>();
             ShieldsBag = new List<Shield>();
             PotionsBag = new List<Potion>();
-            Strength = 10;
+            Achievements = new List<Achievements>();
+            KilledMonsters = new List<Monster>();
+            Strength = 100;
             Defense = 10;
             OriginalHP = 30;
             CurrentHP = 30;
             Golds = 20;//initial golds provided for testing the shop functionality
+
+            Achievements.Add(new Achievements("achievement1","1 Monster Killed", DateTime.Now.ToString()));
+            Achievements.Add(new Achievements("achievement2", "3 Monster Killed", DateTime.Now.ToString()));
+            Achievements.Add(new Achievements("achievement3", "5 Different Monster Killed", DateTime.Now.ToString()));
+            Achievements.Add(new Achievements("achievement4", "10 Monster Killed", DateTime.Now.ToString()));
         }
 
         //These are the Methods of our Class.
@@ -368,6 +377,66 @@ namespace OOP_RPG
                 }
                 this.Heal(potionToUse);
             }
+        }
+
+        public void ShowAchievements()
+        {
+            var receivedAchievement = (from achievement in this.Achievements
+                                       where achievement.Achieved == true
+                                       select achievement).ToList();
+
+            if (!receivedAchievement.Any())
+            {
+                Console.WriteLine("Sorry. No achievement to show.");
+            } else
+            {
+                Console.WriteLine("********************");
+                Console.WriteLine("Achievements");
+                foreach (var achievement in receivedAchievement)
+                {
+                    Console.WriteLine(achievement.ShowInfo());
+                }
+                Console.WriteLine("********************");
+            }
+        }
+
+        public void CheckForAchievements()
+        {
+            var killedMonsters = (from monster in this.KilledMonsters
+                                  orderby monster.Name
+                                  select monster).ToList();
+
+            var killedMonsterByGroup = (from monster in this.KilledMonsters
+                                        group monster by monster.Name into monsters
+                                        select new
+                                        {
+                                            MonstersCount = monsters.Count()
+                                        }).ToList();
+            var achievements = (from achievement in this.Achievements
+                                where achievement.Achieved == false
+                                select achievement).ToList();
+
+            foreach (var achievement in achievements)
+            {
+                if ((killedMonsters.Count == 1 && achievement.ID == "achievement1") ||
+                    (killedMonsters.Count == 3 && achievement.ID == "achievement2") ||
+                    (killedMonsters.Count == 10 && achievement.ID == "achievement4"))
+                {
+                    achievement.Achieved = true;
+                    achievement.Date = DateTime.Now.ToString();
+                    Console.WriteLine($"Congratulations.Achievement Received: {achievement.Name}");
+                }
+
+                foreach(var monsterCount in killedMonsterByGroup)
+                {
+                    if(monsterCount.MonstersCount == 5 && achievement.ID == "achievement3")
+                    {
+                        achievement.Achieved = true;
+                        achievement.Date = DateTime.Now.ToString();
+                        Console.WriteLine($"Congratulations.Achievement Received: {achievement.Name}");
+                    }
+                }
+            }           
         }
     }
 }

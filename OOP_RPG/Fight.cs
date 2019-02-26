@@ -16,7 +16,8 @@ namespace OOP_RPG
             Monsters = new List<Monster>();
             Random = new Random();
             var monstersGroup1 = new List<string> { "Trunks", "Tenshinhan", "Kuririn", "Yamcha", "Son Goku" };
-            var monstersGroup2 = new List<string> { "Android 18", "Son Goten", "Beerus", "Whis", "Son Gohan" };
+            var monstersGroup2 = new List<string> { "Android 18", "Android 18", "Android 18", "Beerus", "Beerus" };
+            //var monstersGroup2 = new List<string> { "Android 18", "Son Goten", "Beerus", "Whis", "Son Gohan" };
             var monstersGroup3 = new List<string> { "Taopaipai", "Broly", "Bobbidi", "Dabra", "Vegeta" };
             var monstersGroup4 = new List<string> { "Oolong", "Pu'ar", "Chi-Chi", "Bulma", "Majin Boo" };
             var monstersGroup5 = new List<string> { "Gyū-Maō", "Lunch", "Chaozu", "Dr. Briefs", "Cell" };
@@ -25,7 +26,7 @@ namespace OOP_RPG
             var monstersGroups = new List<List<string>> { monstersGroup1, monstersGroup2, monstersGroup3, monstersGroup4, monstersGroup5, monstersGroup6, monstersGroup7 };
 
             var daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-            var difficulty = new List<string> { "Easy", "Easy", "Medium", "Medium", "Hard" };
+            var difficulty = new List<Difficulty> { Difficulty.Easy, Difficulty.Easy, Difficulty.Medium, Difficulty.Medium, Difficulty.Hard };
 
             for (var x = 0; x <= 6; x++)
             {//loop to the daysOfWeek and compare the day today to the days on the list
@@ -41,7 +42,7 @@ namespace OOP_RPG
             Enemy = Monsters[Random.Next(0, 5)];
         }
 
-        private void AddMonster(string name, string difficulty)
+        private void AddMonster(string name, Difficulty difficulty)
         {
             var monster = new Monster(name, difficulty);
 
@@ -117,9 +118,9 @@ namespace OOP_RPG
         {
             var randomNumber = Random.Next(1, 101);
 
-            if ((Enemy.Difficulty == "Easy" && randomNumber > 50) ||
-                (Enemy.Difficulty == "Medium" && randomNumber > 75) ||
-                (Enemy.Difficulty == "Hard" && randomNumber > 95))
+            if ((Enemy.Difficulty == Difficulty.Easy && randomNumber > 50) ||
+                (Enemy.Difficulty == Difficulty.Medium && randomNumber > 75) ||
+                (Enemy.Difficulty == Difficulty.Hard && randomNumber > 95))
             {
                 Run();
             }
@@ -174,6 +175,8 @@ namespace OOP_RPG
         private void Win()
         {
             Hero.Golds += Enemy.GoldsDrop;
+            Hero.KilledMonsters.Add(Enemy);
+            Hero.CheckForAchievements();
             Console.WriteLine($"{Enemy.Name} has been defeated! You win the battle! {Enemy.GoldsDrop} Golds received");
         }
 

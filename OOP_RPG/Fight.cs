@@ -110,13 +110,21 @@ namespace OOP_RPG
             int finalDamage;
             int baseDamage;
 
-            if (Hero.EquippedArmor == null)
+            if (Hero.EquippedArmor != null && Hero.EquippedShield != null)
             {
-                baseDamage = Enemy.Strength - Hero.Defense;
+                baseDamage = Enemy.Strength - (Hero.Defense + Hero.EquippedArmor.Defense + Hero.EquippedShield.Defense);
+            }
+            else if (Hero.EquippedArmor != null && Hero.EquippedShield == null)
+            {
+                baseDamage = Enemy.Strength - (Hero.Defense + Hero.EquippedArmor.Defense);
+            }
+            else if (Hero.EquippedArmor == null && Hero.EquippedShield != null)
+            {
+                baseDamage = Enemy.Strength - (Hero.Defense + Hero.EquippedShield.Defense);
             }
             else
             {
-                baseDamage = Enemy.Strength - (Hero.Defense + Hero.EquippedArmor.Defense);
+                baseDamage = Enemy.Strength - Hero.Defense;
             }
 
             if (baseDamage <= 0)

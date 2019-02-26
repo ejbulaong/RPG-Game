@@ -1,6 +1,6 @@
 namespace OOP_RPG
 {
-    public class Weapon
+    public class Weapon : IItems
     {
         public string ID { get; }
         public string Name { get; }
@@ -10,11 +10,16 @@ namespace OOP_RPG
 
         public Weapon(string id, string name, int strength, int price)
         {
-            ID= id;
+            ID = id;
             Name = name;
             Strength = strength;
             Price = price;
             Equipped = false;
+        }
+
+        public string DisplayInfo()
+        {
+            return $"ID: {this.ID} Name: {this.Name} Strength: {this.Strength} Price: {this.Price} Golds";
         }
     }
 }

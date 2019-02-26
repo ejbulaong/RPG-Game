@@ -81,8 +81,10 @@ namespace OOP_RPG
                 Console.WriteLine("Please choose an option:");
                 Console.WriteLine("1 - Equip Weapon");
                 Console.WriteLine("2 - Equip Armor");
-                Console.WriteLine("3 - Unequip Weapon");
-                Console.WriteLine("4 - Unequip Armor");
+                Console.WriteLine("3 - Equip Shield");
+                Console.WriteLine("4 - Unequip Weapon");
+                Console.WriteLine("5 - Unequip Armor");
+                Console.WriteLine("6 - Unequip Shield");
                 Console.WriteLine("0 - Main Menu");
 
                 userInput = Console.ReadLine();
@@ -92,7 +94,7 @@ namespace OOP_RPG
                     Console.WriteLine("Choose a weapon to equip:");
                     foreach (var weapon in Hero.WeaponsBag)
                     {
-                        Console.WriteLine($"ID: {weapon.ID} Weapon: {weapon.Name} Strength: {weapon.Strength}");
+                        Console.WriteLine(weapon.DisplayInfo());
                     }
 
                     Hero.EquipWeapon();
@@ -102,18 +104,32 @@ namespace OOP_RPG
                     Console.WriteLine("Choose an armor to equip:");
                     foreach (var armor in Hero.ArmorsBag)
                     {
-                        Console.WriteLine($"ID: {armor.ID} Weapon: {armor.Name} Defense: {armor.Defense}");
+                        Console.WriteLine(armor.DisplayInfo());
                     }
 
                     Hero.EquipArmor();
                 }
                 else if (userInput == "3")
                 {
-                    Hero.UnequipWeapon();
+                    Console.WriteLine("Choose a shield to equip:");
+                    foreach (var shield in Hero.ShieldsBag)
+                    {
+                        Console.WriteLine(shield.DisplayInfo());
+                    }
+
+                    Hero.EquipShield();
                 }
                 else if (userInput == "4")
                 {
+                    Hero.UnequipWeapon();
+                }
+                else if (userInput == "5")
+                {
                     Hero.UnequipArmor();
+                }
+                else if (userInput == "6")
+                {
+                    Hero.UnequipShield();
                 }
             }
         }
@@ -135,6 +151,8 @@ namespace OOP_RPG
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. Weapons");
                 Console.WriteLine("2. Armors");
+                Console.WriteLine("3. Shields");
+                Console.WriteLine("4. Health Potions");
                 Console.WriteLine("0. Main Menu");
 
                 userInput = Console.ReadLine();
@@ -148,7 +166,7 @@ namespace OOP_RPG
 
                     foreach (var weapon in shop.Weapons)
                     {
-                        Console.WriteLine($"ID: {weapon.ID} Name: {weapon.Name} Strength: {weapon.Strength} Price: {weapon.Price} Golds");
+                        Console.WriteLine(weapon.DisplayInfo());
                     }
 
                     Console.WriteLine("********************");
@@ -174,7 +192,7 @@ namespace OOP_RPG
                     Console.WriteLine("ARMORS");
                     foreach (var armor in shop.Armors)
                     {
-                        Console.WriteLine($"ID: {armor.ID} Name: {armor.Name} Defense: {armor.Defense} Price: {armor.Price} Golds");
+                        Console.WriteLine(armor.DisplayInfo());
                     }
                     Console.WriteLine("********************");
                     Console.Write("Please type armor id: ");
@@ -190,6 +208,59 @@ namespace OOP_RPG
                     }
 
                     Hero.PurchaseArmor(armorToPurchase);
+                }
+                else if (userInput == "3")
+                {
+                    Console.WriteLine("********************");
+                    Console.WriteLine($"Available Golds: {Hero.Golds}\n");
+                    Console.WriteLine("SHIELDS");
+
+                    foreach (var shield in shop.Shields)
+                    {
+                        Console.WriteLine(shield.DisplayInfo());
+                    }
+
+                    Console.WriteLine("********************");
+
+                    Console.Write("Please type shield id: ");
+                    var shieldID = Console.ReadLine();
+                    Shield shieldToPurchase = null;
+
+                    foreach (var shield in shop.Shields)
+                    {
+                        if (shield.ID.ToLower() == shieldID.ToLower())
+                        {
+                            shieldToPurchase = shield;
+                        }
+                    }
+
+                    Hero.PurchaseShield(shieldToPurchase);
+                }
+                else if (userInput == "4")
+                {
+                    Console.WriteLine("********************");
+                    Console.WriteLine($"Available Golds: {Hero.Golds}\n");
+                    Console.WriteLine("POTIONS");
+
+                    foreach (var potion in shop.Potions)
+                    {
+                        Console.WriteLine(potion.DisplayInfo());
+                    }
+
+                    Console.WriteLine("********************");
+
+                    Console.Write("Please type potion id: ");
+                    var potionID = Console.ReadLine();
+                    Potion potionToPurchase = null;
+
+                    foreach (var potion in shop.Potions)
+                    {
+                        if (potion.ID.ToLower() == potionID.ToLower())
+                        {
+                            potionToPurchase = potion;
+                        }
+                    }
+                    Hero.PurchasePotion(potionToPurchase);
                 }
             }
         }

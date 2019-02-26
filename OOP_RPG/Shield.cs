@@ -1,6 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace OOP_RPG
 {
-    public class Armor : IItems
+    public class Shield : IItems
     {
         public string ID { get; }
         public string Name { get; }
@@ -8,7 +14,7 @@ namespace OOP_RPG
         public int Price { get; }
         public bool Equipped { get; set; }
 
-        public Armor(string id, string name, int defense, int price)
+        public Shield(string id, string name, int defense, int price)
         {
             ID = id;
             Name = name;

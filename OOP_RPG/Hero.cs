@@ -15,20 +15,18 @@ namespace OOP_RPG
         public int Golds { get; set; }
         public Weapon EquippedWeapon { get; private set; }
         public Armor EquippedArmor { get; private set; }
-        public List<Armor> ArmorsBag { get; set; }
+        public Shield EquippedShield { get; private set; }
         public List<Weapon> WeaponsBag { get; set; }
+        public List<Armor> ArmorsBag { get; set; }
+        public List<Shield> ShieldsBag { get; set; }
+        public List<Potion> PotionsBag { get; set; }
 
-        /*This is a Constructor.
-        When we create a new object from our Hero class, the instance of this class, our hero, has:
-        an empty List that has to contain instances of the Armor class,
-        an empty List that has to contain instance of the Weapon class,
-        stats of the "int" data type, including an intial strength and defense,
-        original hitpoints that are going to be the same as the current hitpoints.
-        */
         public Hero()
         {
             ArmorsBag = new List<Armor>();
             WeaponsBag = new List<Weapon>();
+            ShieldsBag = new List<Shield>();
+            PotionsBag = new List<Potion>();
             Strength = 10;
             Defense = 10;
             OriginalHP = 30;
@@ -50,10 +48,18 @@ namespace OOP_RPG
                 Console.WriteLine("Strength: " + this.Strength);
             }
 
-            if (this.EquippedArmor != null)
+            if (this.EquippedArmor != null && this.EquippedShield != null)
             {
 
+                Console.WriteLine("Defense: " + this.Defense + "(+" + (this.EquippedArmor.Defense + this.EquippedShield.Defense) + ")");
+            }
+            else if(this.EquippedArmor != null && this.EquippedShield == null)
+            {
                 Console.WriteLine("Defense: " + this.Defense + "(+" + this.EquippedArmor.Defense + ")");
+            }
+            else if (this.EquippedArmor == null && this.EquippedShield != null)
+            {
+                Console.WriteLine("Defense: " + this.Defense + "(+" + this.EquippedShield.Defense + ")");
             }
             else
             {
@@ -74,11 +80,26 @@ namespace OOP_RPG
                 Console.WriteLine(weapon.Name + " of " + weapon.Strength + " Strength");
             }
 
-            Console.WriteLine("Armor: ");
+            Console.WriteLine("Armors: ");
 
             foreach (var armor in this.ArmorsBag)
             {
                 Console.WriteLine(armor.Name + " of " + armor.Defense + " Defense");
+            }
+
+
+            Console.WriteLine("Shields: ");
+
+            foreach (var shield in this.ShieldsBag)
+            {
+                Console.WriteLine(shield.Name + " of " + shield.Defense + " Defense");
+            }
+
+            Console.WriteLine("Potions: ");
+
+            foreach (var potion in this.PotionsBag)
+            {
+                Console.WriteLine(potion.Name + " of " + potion.HealthRestored + " Health Restored");
             }
             Console.WriteLine("Golds: " + Golds);
         }
@@ -139,6 +160,34 @@ namespace OOP_RPG
             }
         }
 
+        public void EquipShield()
+        {
+            if (!ShieldsBag.Any())
+            {
+                Console.WriteLine("Sorry. No shield to equip!!!");
+            }
+            else
+            {
+                var shieldID = "";
+                Console.Write("Please type shields's ID: ");
+                shieldID = Console.ReadLine();
+
+                foreach (var shield in this.ShieldsBag)
+                {
+                    if (shield.ID.ToLower() == shieldID.ToLower() && shield.Equipped == true)
+                    {
+                        Console.WriteLine("Shield already equipped!!!");
+                    }
+                    else if (shield.ID.ToLower() == shieldID.ToLower() && shield.Equipped == false)
+                    {
+                        this.EquippedShield = shield;
+                        shield.Equipped = true;
+                        Console.WriteLine("Successfully equipped shield!!!");
+                    }
+                }
+            }
+        }
+
         public void UnequipWeapon()
         {
             if (this.EquippedWeapon == null)
@@ -170,6 +219,23 @@ namespace OOP_RPG
                     armor.Equipped = false;
                 }
                 Console.WriteLine("Armor successfully unequiped!!!");
+            }
+        }
+
+        public void UnequipShield()
+        {
+            if (this.EquippedShield == null)
+            {
+                Console.WriteLine("Sorry you are not equipped with any shield!!!");
+            }
+            else
+            {
+                this.EquippedShield = null;
+                foreach (var shield in this.ShieldsBag)
+                {
+                    shield.Equipped = false;
+                }
+                Console.WriteLine("Shield successfully unequiped!!!");
             }
         }
 
@@ -207,6 +273,56 @@ namespace OOP_RPG
                 this.Golds -= armor.Price;
                 Console.WriteLine($"{armor.Name} successfully purchased!!!");
                 ArmorsBag.Add(armor);
+            }
+        }
+
+        public void PurchaseShield(Shield shield)
+        {
+            if (shield == null)
+            {
+                Console.WriteLine($"Sorry. Shield not found!!!");
+            }
+            else if (this.Golds < shield.Price)
+            {
+                Console.WriteLine($"Sorry. Not enough Golds!!!");
+            }
+            else
+            {
+                this.Golds -= shield.Price;
+                Console.WriteLine($"{shield.Name} successfully purchased!!!");
+                ShieldsBag.Add(shield);
+            }
+        }
+
+        public void PurchasePotion(Potion potion)
+        {
+            if (potion == null)
+            {
+                Console.WriteLine($"Sorry. Potion not found!!!");
+            }
+            else if (this.Golds < potion.Price)
+            {
+                Console.WriteLine($"Sorry. Not enough Golds!!!");
+            }
+            else
+            {
+                this.Golds -= potion.Price;
+                Console.WriteLine($"{potion.Name} successfully purchased!!!");
+                PotionsBag.Add(potion);
+            }
+        }
+
+        public void Heal(Potion potion)
+        {
+            var maxHP = this.OriginalHP;
+
+            if(this.CurrentHP + potion.HealthRestored > maxHP)
+            {
+                this.CurrentHP = maxHP;
+            }
+            else
+            {
+                this.CurrentHP += potion.HealthRestored;
             }
         }
     }

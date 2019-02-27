@@ -54,9 +54,10 @@ namespace OOP_RPG
         {
             while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0 && RunningAway == false)
             {
-                Console.WriteLine("You've encountered " + Enemy.Name + "! " + Enemy.Strength + " Strength/" + Enemy.Defense + " Defense/" +
-                Enemy.CurrentHP + " HP/" + Enemy.Difficulty + " Level. What will you do?");
-
+                Console.WriteLine($"Hero: {Hero.Name} Str: {Hero.Strength} Def: {Hero.Defense} HP: {Hero.CurrentHP}");
+                Console.WriteLine("VS");
+                Console.WriteLine($"{Enemy.Difficulty} Enemy: {Enemy.Name} Str: {Enemy.Strength} Def: {Enemy.Defense} HP: {Enemy.CurrentHP}");
+                Console.WriteLine("What will you do?");
                 Console.WriteLine("1. Fight");
                 Console.WriteLine("2. Run");
                 Console.WriteLine("3. Heal");

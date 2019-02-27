@@ -14,6 +14,7 @@ namespace OOP_RPG
         public int CurrentHP { get; set; }
         public int Golds { get; set; }
         public int AchievementPoints { get; set; }
+        public Rank Rank { get; set; }
         public Weapon EquippedWeapon { get; private set; }
         public Armor EquippedArmor { get; private set; }
         public Shield EquippedShield { get; private set; }
@@ -32,6 +33,7 @@ namespace OOP_RPG
             CurrentHP = 30;
             Golds = 30;//initial golds provided for testing the shop functionality
             AchievementPoints = 0;
+            Rank = Rank.Novice;
 
             Achievements.Add(new Achievements("achievement1", "1 Monster Killed", DateTime.Now.ToString(), 1));
             Achievements.Add(new Achievements("achievement2", "3 Monster Killed", DateTime.Now.ToString(), 2));
@@ -71,8 +73,8 @@ namespace OOP_RPG
                 Console.WriteLine("Defense: " + this.Defense);
             }
 
-
             Console.WriteLine("Hitpoints: " + this.CurrentHP + "/" + this.OriginalHP);
+            Console.WriteLine("Rank: " + this.Rank);
         }
 
         public void ShowInventory()
@@ -315,12 +317,29 @@ namespace OOP_RPG
                 {
                     achievement.Achieved = true;
                     this.AchievementPoints += achievement.Points;
+
+                    if(AchievementPoints == 1)
+                    {
+                        this.Rank = Rank.Apprentice;
+                    }
+                    if (AchievementPoints == 3)
+                    {
+                        this.Rank = Rank.Intermediate;
+                    }
+                    else if (AchievementPoints >= 6 && AchievementPoints <= 10)
+                    {
+                        this.Rank = Rank.Master;
+                    }
+                    else if (AchievementPoints > 10)
+                    {
+                        this.Rank = Rank.GrandMaster;
+                    }
+
                     achievement.Date = DateTime.Now.ToString();
                     Console.WriteLine($"Congratulations.Achievement Received: {achievement.Name}");
+                    Console.WriteLine($"Your new Rank is {this.Rank}!!!");
                 }
             }
         }
-
-
     }
 }

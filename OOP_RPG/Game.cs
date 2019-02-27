@@ -251,7 +251,6 @@ namespace OOP_RPG
                 Hero.Golds -= itemToPurchase.Price;
                 Hero.PurchaseItem(itemToPurchase);
             }
-
         }
     }
 }

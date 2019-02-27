@@ -74,7 +74,6 @@ namespace OOP_RPG
                     Console.WriteLine(item.DisplayInfo());
                 }
             }
-
         }
     }
 }

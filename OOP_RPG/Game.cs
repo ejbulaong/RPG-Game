@@ -14,8 +14,22 @@ namespace OOP_RPG
 
         public void Start()
         {
+            var arr = new[]
+            {
+                @"  _____    _____     _____      _____              __  __   ______ ",
+                @" |  __ \  |  __ \   / ____|    / ____|     /\     |  \/  | |  ____|",
+                @" | |__) | | |__) | | |  __    | |  __     /  \    | \  / | | |__   ",
+                @" |  _  /  |  ___/  | | |_ |   | | |_ |   / /\ \   | |\/| | |  __|",
+                @" | | \ \  | |      | |__| |   | |__| |  / ____ \  | |  | | | |____ ",
+                @" |_|  \_\ |_|       \_____|    \_____| /_/    \_\ |_|  |_| |______|",
+            };
+            foreach (string line in arr)
+            {
+                Console.WriteLine(line);
+            }
+            Console.WriteLine("\n\n");
             Console.WriteLine("Welcome hero!");
-            Console.WriteLine("Please enter your name:");
+            Console.Write("Please enter your name:");
 
             Hero.Name = Console.ReadLine();
 
@@ -123,23 +137,30 @@ namespace OOP_RPG
                                   (item is Potion)
                                select item).ToList();
 
-            Console.WriteLine("Unequipped Items available to sell:");
-            foreach (var item in itemsToSell)
+            if (!itemsToSell.Any())
             {
-                Console.WriteLine(item.DisplayInfo());
+                Console.WriteLine("Sorry. No Unequip items to sell.");
             }
-            Console.Write("Please enter the Item's ID to sell: ");
-            userInput = Console.ReadLine();
-
-            foreach (var item in itemsToSell)
+            else
             {
-                if (item.ID.ToLower() == userInput.ToLower())
+                Console.WriteLine("Unequipped Items available to sell:");
+                foreach (var item in itemsToSell)
                 {
-                    itemToSell = item;
+                    Console.WriteLine(item.DisplayInfo());
                 }
-            }
+                Console.Write("Please enter the Item's ID to sell: ");
+                userInput = Console.ReadLine();
 
-            Hero.SellItem(itemToSell);
+                foreach (var item in itemsToSell)
+                {
+                    if (item.ID.ToLower() == userInput.ToLower())
+                    {
+                        itemToSell = item;
+                    }
+                }
+
+                Hero.SellItem(itemToSell);
+            }
         }
 
         private void UnequipItem()

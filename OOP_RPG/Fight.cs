@@ -52,10 +52,31 @@ namespace OOP_RPG
 
         public void Start()
         {
+            var arr = new[]
+                {
+                    @"                                                         .,",
+                    @"                                                .    ____/__,",
+                    @"   \\\|||///                                  .' \  / \==\",
+                    @" ^  =======                                  /    \ 77 \ |",
+                    @"/ \| O   O |                                /_.----\\__,-----.",
+                    @"\ / \`___'/                             <--(\_|_____<__|_____/",
+                    @" #   _| |_                                  \  ````/|   ``/```",
+                    @"(#) (     )       __      __  _____          `.   / |    I|",
+                    @" #\//|* *|\\      \ \    / / /  ___|           `./  |____I|",
+                    @" #\/(  *  )/       \ \  / /  | (___                 !!!!!!!",
+                    @" #   =====          \ \/ /    \___ \                | | I | ",
+                    @" #   ( U )           \  /     ____) |               \ \ I |",
+                    @" #   || ||            \/     |_____/                | | I |",
+                    @".#---'| |`----.                                    _|_|_I_|",
+                    @"`#----' `-----'                                   /__/____|",
+            };
+            foreach (string line in arr)
+            {
+                Console.WriteLine(line);
+            }
             while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0 && RunningAway == false)
             {
-                Console.WriteLine($"Hero: {Hero.Name} Str: {Hero.Strength} Def: {Hero.Defense} HP: {Hero.CurrentHP}");
-                Console.WriteLine("VS");
+                Console.Write($"Hero: {Hero.Name} Str: {Hero.Strength} Def: {Hero.Defense} HP: {Hero.CurrentHP} VS ");
                 Console.WriteLine($"{Enemy.Difficulty} Enemy: {Enemy.Name} Str: {Enemy.Strength} Def: {Enemy.Defense} HP: {Enemy.CurrentHP}");
                 Console.WriteLine("What will you do?");
                 Console.WriteLine("1. Fight");

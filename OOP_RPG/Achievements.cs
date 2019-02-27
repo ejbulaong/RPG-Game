@@ -12,13 +12,15 @@ namespace OOP_RPG
         public string Name { get; set; }
         public string Date { get; set; }
         public bool Achieved { get; set; }
+        public int Points { get; set; }
 
-        public Achievements(string id, string name, string date)
+        public Achievements(string id, string name, string date, int points)
         {
             ID = id;
             Name = name;
             Date = date;
             Achieved = false;
+            Points = points;
         }
 
         public string ShowInfo()

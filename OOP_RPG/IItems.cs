@@ -8,6 +8,9 @@ namespace OOP_RPG
 {
     public interface IItems
     {
+        string ID { get; }
+        string Name { get; }
+        int Price { get; }
         string DisplayInfo();
     }
 }

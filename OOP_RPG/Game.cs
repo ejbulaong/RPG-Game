@@ -114,7 +114,32 @@ namespace OOP_RPG
 
         private void SellItem()
         {
+            var userInput = "";
+            IItems itemToSell = null;
+            var itemsToSell = (from item in Hero.ItemsBag
+                               where (item is Weapon && ((Weapon)item).Equipped == false) ||
+                                  (item is Armor && ((Armor)item).Equipped == false) ||
+                                  (item is Shield && ((Shield)item).Equipped == false) ||
+                                  (item is Potion)
+                               select item).ToList();
 
+            Console.WriteLine("Unequipped Items available to sell:");
+            foreach (var item in itemsToSell)
+            {
+                Console.WriteLine(item.DisplayInfo());
+            }
+            Console.Write("Please enter the Item's ID to sell: ");
+            userInput = Console.ReadLine();
+
+            foreach (var item in itemsToSell)
+            {
+                if (item.ID.ToLower() == userInput.ToLower())
+                {
+                    itemToSell = item;
+                }
+            }
+
+            Hero.SellItem(itemToSell);
         }
 
         private void UnequipItem()

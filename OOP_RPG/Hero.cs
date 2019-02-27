@@ -114,6 +114,33 @@ namespace OOP_RPG
             Console.WriteLine($"{item.Name} successfully purchased");
         }
 
+        public void SellItem(IItems item)
+        {
+            if (item == null)
+            {
+                Console.WriteLine("Sorry. Item not found!!!");
+            }
+            else
+            {
+                var userInput = "";
+
+                Console.Write($"{item.Name} selling price is {Convert.ToInt32(item.Price * 0.75)} Golds. Are you sure you want to sell this item?[Type Y to sell item...]");
+                userInput = Console.ReadLine();
+
+                if (userInput == "Y" || userInput == "y")
+                {
+                    var soldPrice = Convert.ToInt32(item.Price * 0.75);
+                    this.Golds += soldPrice;
+                    this.ItemsBag.Remove(item);
+                    Console.WriteLine($"Item sold. {soldPrice} golds received ");
+                }
+                else
+                {
+                    Console.WriteLine($"Selling Item cancelled.");
+                }
+            }
+        }
+
         public void EquipItem(IItems item)
         {
             if (item == null)
@@ -142,7 +169,8 @@ namespace OOP_RPG
                     this.EquippedShield = shield;
                     shield.Equipped = true;
                     Console.WriteLine($"{item.Name} Successfully Equipped!!!");
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Equip Failed. You need to an Unequipped first");
                 }
@@ -292,5 +320,7 @@ namespace OOP_RPG
                 }
             }
         }
+
+
     }
 }
